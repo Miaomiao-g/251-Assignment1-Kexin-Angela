@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ea565fcd-4a13-46ab-b5a2-c3f8e8f93d05" name="Default Changelist" comment="" />
+    <list default="true" id="ea565fcd-4a13-46ab-b5a2-c3f8e8f93d05" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Assignment/action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Assignment/action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Assignment/action$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Assignment/action$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Assignment/action$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Assignment/action$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Assignment/action$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Assignment/action$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Assignment/action.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Assignment/action.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,20 +43,28 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1iSfm80VrJ9SY8sM61jrbyGwzgN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RunManager">
     <configuration name="action" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="14" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Assignment.action" />
-      <module name="Assignment" />
+      <module name="251-Assignment1-Kexin-Angela" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Assignment.*" />
@@ -54,10 +91,47 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601906069753</updated>
+      <workItem from="1601981188552" duration="398000" />
+      <workItem from="1601983020545" duration="5000" />
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="444" y="47" key="#action" timestamp="1601981491961">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="444" y="47" key="#action/0.0.1536.864@0.0.1536.864" timestamp="1601981491961" />
+    <state width="1493" height="223" key="GridCell.Tab.0.bottom" timestamp="1601981589413">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="223" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1601981589413" />
+    <state width="1493" height="223" key="GridCell.Tab.0.center" timestamp="1601981589413">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="223" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1601981589413" />
+    <state width="1493" height="223" key="GridCell.Tab.0.left" timestamp="1601981589413">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="223" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1601981589413" />
+    <state width="1493" height="223" key="GridCell.Tab.0.right" timestamp="1601981589413">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1601981589413" />
     <state x="139" y="0" key="SettingsEditor" timestamp="1601906256821">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
