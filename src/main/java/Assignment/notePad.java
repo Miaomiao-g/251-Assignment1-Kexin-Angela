@@ -93,9 +93,8 @@ public class notePad {
         f.pack();
     }
 
-    public void eventListener(){
-        //事件监听
-        // new事件监听
+    // new事件监听
+    public void newListen(){
         item0.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,8 +112,10 @@ public class notePad {
 
             }
         });
+    }
 
-        //open 事件
+    //open 事件
+    public void openListen(){
         item1.addActionListener(new ActionListener() {
 
             @Override
@@ -125,12 +126,14 @@ public class notePad {
                     File file = chooser.getSelectedFile();
                     textArea.setText(file.getName()+":"+file.getPath()+"\n"+file.length());
                     readFile(file);
-                };
+                }
 
             }
         });
+    }
 
-        //save事件
+    //save事件
+    public void saveListen(){
         item2.addActionListener(new ActionListener() {
 
             @Override
@@ -143,8 +146,10 @@ public class notePad {
                 }
             }
         });
+    }
 
-        //处理退出菜单项的动作事件
+    //处理退出菜单项的动作事件
+    public void exitListen(){
         item4.addActionListener(new ActionListener() {
 
             @Override
@@ -158,24 +163,30 @@ public class notePad {
 
             }
         });
+    }
 
-        // search event
+    // search event
+    public void searchListen(){
         editItem0.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
         });
+    }
 
-        // select all 事件触发
+    // select all 事件触发
+    public void selectAllListen(){
         editItem1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 textArea.selectAll();
             }
         });
+    }
 
-        // copy事件
+    // copy事件
+    public void copyListen(){
         editItem2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -185,8 +196,10 @@ public class notePad {
                 clipBoard.setContents(selection,null);
             }
         });
+    }
 
-        // past 事件
+    // past 事件
+    public void pastListen(){
         editItem3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -197,14 +210,16 @@ public class notePad {
                 try
                 { text=(String)contents.getTransferData(DataFlavor.stringFlavor);
                 }
-                catch (Exception exception)
+                catch (Exception ignored)
                 {
                 }
                 textArea.replaceRange(text, textArea.getSelectionStart(), textArea.getSelectionEnd());
             }
         });
+    }
 
-        // cut 事件
+    // cut 事件
+    public void cutListen(){
         editItem4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -215,8 +230,10 @@ public class notePad {
                 textArea.replaceRange("", textArea.getSelectionStart(), textArea.getSelectionEnd());
             }
         });
+    }
 
-        //time and date事件
+    //time and date事件
+    public void timeListen(){
         editItem5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -225,7 +242,10 @@ public class notePad {
                 textArea.insert(date.toString(),textArea.getCaretPosition());
             }
         });
+    }
 
+    // about event
+    public void aboutListen(){
         aboutItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -233,6 +253,32 @@ public class notePad {
                 JOptionPane.showMessageDialog(null, "Members: Wang Kexin, Zhao Yizhen","About us", JOptionPane.PLAIN_MESSAGE);
             }
         });
+    }
+
+    //事件监听
+    public void eventListener(){
+
+        newListen();
+
+        openListen();
+
+        saveListen();
+
+        exitListen();
+
+        searchListen();
+
+        selectAllListen();
+
+        copyListen();
+
+        pastListen();
+
+        cutListen();
+
+        timeListen();
+
+        aboutListen();
     }
 
     public void readFile(File file){//读文件
@@ -251,7 +297,7 @@ public class notePad {
         }
     }
     public void writeFile(String savepath){//写文件
-        FileOutputStream fos= null;
+        FileOutputStream fos;
         try {
             fos=new FileOutputStream(savepath);
             fos.write(textArea.getText().getBytes());

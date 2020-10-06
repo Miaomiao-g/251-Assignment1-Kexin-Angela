@@ -1,5 +1,6 @@
 package Assignment;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.swing.*;
@@ -9,17 +10,15 @@ import java.io.FileInputStream;
 
 public class actionTest {
 
-    JFrame f;
-    JLabel label;
-    JTextArea textArea;
-    JFileChooser fileChooser;
-    FileInputStream fileInStream;
-    JMenuItem item0, item1, item2, item3, item4, editItem0, editItem1, editItem2, editItem3, editItem4, editItem5, aboutItem;
-    JMenu menu1, menu2, menu3;
+    private int boundX = 400, boundY = 300;
 
-    // 系统剪贴板
-    Toolkit toolkit=Toolkit.getDefaultToolkit();
-    Clipboard clipBoard=toolkit.getSystemClipboard();
+    notePad note;
+
+    @Before
+    public void initTest(){
+        note = new notePad();
+        note.init();
+    }
 
     @Test
     public void testInit(){
@@ -28,7 +27,22 @@ public class actionTest {
 
     @Test
     public void testOpen(){
+        note.openListen();
+    }
 
+    @Test
+    public void testSave(){
+        note.saveListen();
+    }
+
+    @Test
+    public void testSearch(){
+        note.searchListen();
+    }
+
+    @Test
+    public void testCopy(){
+        note.copyListen();
     }
 
 }
