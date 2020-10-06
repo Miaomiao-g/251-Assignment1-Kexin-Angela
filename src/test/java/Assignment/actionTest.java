@@ -26,4 +26,9 @@ public class actionTest {
         action.main(null);
     }
 
+    @Test
+    public void testOpen(){
+
+    }
+
 }
