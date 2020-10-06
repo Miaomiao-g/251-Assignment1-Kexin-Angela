@@ -6,6 +6,10 @@ import java.awt.Dimension;
 import java.awt.FileDialog;
 import java.awt.TextArea;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -37,15 +41,19 @@ import javax.swing.JTextArea;
 
 public class action extends JFrame{
 
-    JFrame f;
-    JLabel label;
-    JTextArea textArea;
-    JFileChooser fileChooser;
-    FileInputStream fileInStream;
-    JMenuItem item0, item1, item2, item3, item4, editItem0, editItem1, editItem2, editItem3, editItem4, editItem5, aboutItem;
-    JMenu menu1, menu2, menu3;
+    private static JFrame f;
+    private static JLabel label;
+    private static JTextArea textArea;
+    private static JFileChooser fileChooser;
+    private static FileInputStream fileInStream;
+    private static JMenuItem item0, item1, item2, item3, item4, editItem0, editItem1, editItem2, editItem3, editItem4, editItem5, aboutItem;
+    private static JMenu menu1, menu2, menu3;
 
-    int boundX = 400, boundY = 300;
+    // 系统剪贴板
+    private static Toolkit toolkit=Toolkit.getDefaultToolkit();
+    private static Clipboard clipBoard=toolkit.getSystemClipboard();
+
+    private static int boundX = 400, boundY = 300;
 
     public action() {
 
@@ -53,7 +61,7 @@ public class action extends JFrame{
         eventListener();
     }
 
-    public void init(){
+    public static void init(){
         // TODO Auto-generated constructor stub
         f=new JFrame("Test Editor");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,7 +127,7 @@ public class action extends JFrame{
         f.pack();
     }
 
-    public void eventListener(){
+    public static void eventListener(){
         //事件监听
         // new事件监听
         item0.addActionListener(new ActionListener() {
@@ -185,6 +193,63 @@ public class action extends JFrame{
             }
         });
 
+        // search event
+        editItem0.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        // select all 事件触发
+        editItem1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.selectAll();
+            }
+        });
+
+        // copy事件
+        editItem2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.requestFocus();
+                String text = textArea.getSelectedText();
+                StringSelection selection = new StringSelection(text);
+                clipBoard.setContents(selection,null);
+            }
+        });
+
+        // past 事件
+        editItem3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.requestFocus();
+                Transferable contents = clipBoard.getContents(this);
+                if(contents == null) return;
+                String text = "";
+                try
+                { text=(String)contents.getTransferData(DataFlavor.stringFlavor);
+                }
+                catch (Exception exception)
+                {
+                }
+                textArea.replaceRange(text, textArea.getSelectionStart(), textArea.getSelectionEnd());
+            }
+        });
+
+        // cut 事件
+        editItem4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.requestFocus();
+                String text = textArea.getSelectedText();
+                StringSelection selection = new StringSelection(text);
+                clipBoard.setContents(selection,null);
+                textArea.replaceRange("", textArea.getSelectionStart(), textArea.getSelectionEnd());
+            }
+        });
+
         //time and date事件
         editItem5.addActionListener(new ActionListener() {
             @Override
@@ -204,29 +269,7 @@ public class action extends JFrame{
         });
     }
 
-    public void copyFile(File file){//复制文件
-        File to=new File(file.getAbsolutePath()+"_copy");
-        if (file.isFile()) {
-            byte[] buf = new byte[1024];//字节流
-            int length=0;
-            try {
-                FileInputStream in=new FileInputStream(file);
-                FileOutputStream out=new FileOutputStream(to);
-                while((length=in.read(buf))>0){
-                    out.write(buf,0,length);
-                }
-                out.flush();
-                in.close();
-                out.close();
-            } catch (Exception e) {
-                // TODO Auto-generated catchblock
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    public void readFile(File file){//读文件
+    public static void readFile(File file){//读文件
         BufferedReader bReader;
         try {
             bReader=new BufferedReader(new FileReader(file));
@@ -241,7 +284,7 @@ public class action extends JFrame{
             // TODO: handle exception
         }
     }
-    public void writeFile(String savepath){//写文件
+    public static void writeFile(String savepath){//写文件
         FileOutputStream fos= null;
         try {
             fos=new FileOutputStream(savepath);
