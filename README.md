@@ -1,8 +1,7 @@
 # 251-Assignment1-Kexin-Angela
-
 ## The names & IDs of BOTH MEMBERS of the group:
-### Angela Zhao 19029960
-### Kexin Wang 19029955
+### Member1:Angela Zhao 19029960
+### Member2:Kexin Wang 19029955
 
 ## How to run our program:
 ### If you want to run this project, you need to run the *action.java* file.
