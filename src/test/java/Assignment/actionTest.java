@@ -10,8 +10,6 @@ import java.io.FileInputStream;
 
 public class actionTest {
 
-    private int boundX = 400, boundY = 300;
-
     notePad note;
 
     @Before

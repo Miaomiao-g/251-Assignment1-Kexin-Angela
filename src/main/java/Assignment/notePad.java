@@ -170,9 +170,111 @@ public class notePad {
         editItem0.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                textArea.requestFocus();
+                find();
             }
         });
+    }
+
+    // search algorithm
+    public void find(){
+        //create event buttons
+        //Keep other windows was active when Search window was opened
+        final JDialog findDialog=new JDialog(f, "Search", false);//false时允许其他窗口同时处于激活状态(即无模式)
+        Container con=findDialog.getContentPane();//返回此对话框的contentPane对象
+        con.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        //Search text table
+        JLabel findContentLabel=new JLabel("Search content：");
+        final JTextField findText=new JTextField(15);
+
+        // cearte buttons
+        JButton findNextButton=new JButton("Search next：");
+        final JCheckBox matchCheckBox=new JCheckBox("Match case");
+        ButtonGroup bGroup=new ButtonGroup();
+        final JRadioButton upButton=new JRadioButton("Up Search");
+        final JRadioButton downButton=new JRadioButton("Down Search");
+        downButton.setSelected(true);
+        bGroup.add(upButton);
+        bGroup.add(downButton);
+        JButton cancel=new JButton("cancel");
+
+        // all button event listener
+        //取消按钮事件处理
+        cancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                findDialog.dispose();
+            }
+        });
+        //"查找下一个"按钮监听
+        findNextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //"区分大小写(C)"的JCheckBox是否被选中
+                int k;
+                final String str1,str2,str3,str4,strA,strB;
+                str1=textArea.getText();
+                str2=findText.getText();
+                str3=str1.toUpperCase();
+                str4=str2.toUpperCase();
+                if(matchCheckBox.isSelected()){ //区分大小写
+                    strA=str1;
+                    strB=str2;
+                }
+                else{ //不区分大小写,此时把所选内容全部化成大写(或小写)，以便于查找
+                    strA=str3;
+                    strB=str4;
+                }
+                if(upButton.isSelected()) {
+                    if(textArea.getSelectedText()==null)
+                        k=strA.lastIndexOf(strB,textArea.getCaretPosition()-1);
+                    else
+                        k=strA.lastIndexOf(strB, textArea.getCaretPosition()-findText.getText().length()-1);
+                    if(k>-1) {
+                        textArea.setCaretPosition(k);
+                        textArea.select(k,k+strB.length());
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"Can't Searched it！","Search",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+                else if(downButton.isSelected()) {
+                    if(textArea.getSelectedText()==null)
+                        k=strA.indexOf(strB,textArea.getCaretPosition()+1);
+                else
+                    k=strA.indexOf(strB, textArea.getCaretPosition()-findText.getText().length()+1);
+                    if(k>-1) {
+                        textArea.setCaretPosition(k);
+                        textArea.select(k,k+strB.length());
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"Can't Searched it！","Search",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
+        });
+
+        // make a search panel
+        JPanel panel1=new JPanel();
+        JPanel panel2=new JPanel();
+        JPanel panel3=new JPanel();
+        JPanel directionPanel=new JPanel();
+        directionPanel.setBorder(BorderFactory.createTitledBorder("Search Direction"));
+        directionPanel.add(upButton);
+        directionPanel.add(downButton);
+        panel1.setLayout(new GridLayout(2,1));
+        panel1.add(findNextButton);
+        panel1.add(cancel);
+        panel2.add(findContentLabel);
+        panel2.add(findText);
+        panel2.add(panel1);
+        panel3.add(matchCheckBox);
+        panel3.add(directionPanel);
+        con.add(panel2);
+        con.add(panel3);
+        findDialog.setSize(410,180);
+        findDialog.setResizable(false);//不可调整大小
+        findDialog.setLocation(230,280);
+        findDialog.setVisible(true);
     }
 
     // select all 事件触发
@@ -285,10 +387,10 @@ public class notePad {
         BufferedReader bReader;
         try {
             bReader=new BufferedReader(new FileReader(file));
-            StringBuffer sBuffer=new StringBuffer();
+            StringBuilder sBuffer=new StringBuilder();
             String str;
             while((str=bReader.readLine())!=null){
-                sBuffer.append(str+'\n');
+                sBuffer.append(str).append('\n');
                 System.out.println(str);
             }
             textArea.setText(sBuffer.toString());
