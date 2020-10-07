@@ -1,10 +1,12 @@
 package Assignment;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Document;
 import javax.swing.*;
-
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
@@ -22,10 +24,10 @@ import java.util.Date;
 public class notePad {
     private JFrame f;
     private JLabel label;
-    private static JTextArea textArea;
+    private JTextArea textArea;
     private JFileChooser fileChooser;
     private FileInputStream fileInStream;
-    private JMenuItem item0, item1, item2, item3, item4, editItem0, editItem1, editItem2, editItem3, editItem4, editItem5, aboutItem;
+    private JMenuItem item0, item1, item2, item3, item4, editItem0, editItem1, editItem2, editItem3, editItem4, editItem5, aboutItem, viewItem0, viewItem1;
     private JMenu menu1, menu2, menu3, menu4;
 
     // System clipboard
@@ -42,17 +44,19 @@ public class notePad {
 
         Container contentPane=f.getContentPane();
         textArea=new JTextArea();
-        //textArea.getDocument().addDocumentListener(new SyntaxHighlighter(textArea));
         JScrollPane scrollPane=new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(350, 300));
         JPanel panel=new JPanel();
+
+        //textArea.getDocument().addDocumentListener(new SyntaxHighlighter(pane));
+
         JMenuBar menuBar1=new JMenuBar();  //Add the menu bar component
         f.setJMenuBar(menuBar1);          //Adds the menu bar to the top-level container
 
         menu1=new JMenu("File");
         menu2=new JMenu("Edit");
         menu3=new JMenu("About");
-        menu4=new JMenu("Help");
+        menu4=new JMenu("View");
 
         //Adds the menu component to the menu bar component
         menuBar1.add(menu1);
@@ -93,6 +97,12 @@ public class notePad {
         //Create the About component
         aboutItem = new JMenuItem("About");
         menu3.add(aboutItem);
+
+        // create the View menu item
+        viewItem0 = new JMenuItem("Eye-shield mode");
+        viewItem1 = new JMenuItem("common mode");
+        menu4.add(viewItem0);
+        menu4.add(viewItem1);
 
         //Sets the visibility of the top-level container classes
         f.setVisible(true);
@@ -382,6 +392,34 @@ public class notePad {
         });
     }
 
+    // eye-field view mode
+    public void eViewListen(){
+        viewItem0.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String path = action.class.getClassLoader().getResource("config.json").getPath();
+                String s = readJsonFile(path);
+                JSONObject jobj = JSON.parseObject(s);
+                JSONArray movies = jobj.getJSONArray("RECORDS");//构建JSONArray数组
+                JSONObject key = (JSONObject)movies.get(0);
+                int greenR = Integer.parseInt((String) key.get("colorGreenR"));
+                int greenG = Integer.parseInt((String) key.get("colorGreenG"));
+                int greenB = Integer.parseInt((String) key.get("colorGreenB"));
+                textArea.setBackground(new Color(greenR, greenG, greenB));
+            }
+        });
+    }
+
+    // common view mode
+    public void cViewMode(){
+        viewItem1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.setBackground(Color.white);
+            }
+        });
+    }
+
     //4/5000
     //Event listeners
     public void eventListener(){
@@ -407,6 +445,10 @@ public class notePad {
         timeListen();
 
         aboutListen();
+
+        eViewListen();
+
+        cViewMode();
     }
 
     public void readFile(File file){//Read the file
@@ -424,6 +466,8 @@ public class notePad {
             // TODO: handle exception
         }
     }
+
+    // write file as txt
     public void writeFile(String savepath){//Write files
         FileOutputStream fos;
         try {
@@ -437,7 +481,9 @@ public class notePad {
         }
         textArea.getText();
     }
-    public static void writePdf(String outpath) {
+
+    // write file as pdf
+    public void writePdf(String outpath) {
         try {
             //1 创建Document
             Document document = new Document();
@@ -451,6 +497,28 @@ public class notePad {
             document.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    // read json file
+    public String readJsonFile(String fileName) {
+        String jsonStr = "";
+        try {
+            File jsonFile = new File(fileName);
+            FileReader fileReader = new FileReader(jsonFile);
+            Reader reader = new InputStreamReader(new FileInputStream(jsonFile),"utf-8");
+            int ch = 0;
+            StringBuffer sb = new StringBuffer();
+            while ((ch = reader.read()) != -1) {
+                sb.append((char) ch);
+            }
+            fileReader.close();
+            reader.close();
+            jsonStr = sb.toString();
+            return jsonStr;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
