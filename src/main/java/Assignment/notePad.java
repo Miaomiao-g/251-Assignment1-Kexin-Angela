@@ -21,7 +21,7 @@ public class notePad {
     private JMenuItem item0, item1, item2, item3, item4, editItem0, editItem1, editItem2, editItem3, editItem4, editItem5, aboutItem;
     private JMenu menu1, menu2, menu3;
 
-    // 系统剪贴板
+    // System clipboard
     private Toolkit toolkit=Toolkit.getDefaultToolkit();
     private Clipboard clipBoard=toolkit.getSystemClipboard();
 
@@ -38,19 +38,21 @@ public class notePad {
         JScrollPane scrollPane=new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(350, 300));
         JPanel panel=new JPanel();
-        JMenuBar menuBar1=new JMenuBar();  //添加菜单条组件
-        f.setJMenuBar(menuBar1);          //将菜单栏添加到顶层容器中
+        JMenuBar menuBar1=new JMenuBar();  //Add the menu bar component
+        f.setJMenuBar(menuBar1);          //Adds the menu bar to the top-level container
 
         menu1=new JMenu("File");
         menu2=new JMenu("Edit");
         menu3=new JMenu("About");
+        menu4=new JMenu("Help");
 
-        //将菜单组件添加到菜单条组件中
+        //Adds the menu component to the menu bar component
         menuBar1.add(menu1);
         menuBar1.add(menu2);
         menuBar1.add(menu3);
+        menuBar1.add(menu4);
 
-        //创建file菜单项组件
+        //Create the File menu item component
         item0 = new JMenuItem("New");
         item1=new JMenuItem("Open");
         item2=new JMenuItem("Save");
@@ -59,12 +61,12 @@ public class notePad {
         menu1.add(item0);
         menu1.add(item1);
         menu1.add(item2);
-        menu1.addSeparator();           //菜单项之间的分隔线组件
+        menu1.addSeparator();           //A delimited line group of items between menu items
         menu1.add(item3);
         menu1.addSeparator();
         menu1.add(item4);
 
-        //创建edit菜单项组件
+        //Create the Edit menu item component
         editItem0 = new JMenuItem("Search");
         editItem1 = new JMenuItem("Select All");
         editItem2 = new JMenuItem("Copy");
@@ -80,11 +82,11 @@ public class notePad {
         menu2.addSeparator();
         menu2.add(editItem5);
 
-        //创建about组件
+        //Create the About component
         aboutItem = new JMenuItem("About");
         menu3.add(aboutItem);
 
-        //设置顶层容器类的可见性
+        //Sets the visibility of the top-level container classes
         f.setVisible(true);
         label=new JLabel("",JLabel.CENTER);
         contentPane.add(label, BorderLayout.NORTH);
@@ -93,7 +95,7 @@ public class notePad {
         f.pack();
     }
 
-    // new事件监听
+    //New event listening
     public void newListen(){
         item0.addActionListener(new ActionListener() {
             @Override
@@ -101,7 +103,7 @@ public class notePad {
 
                 int i=JOptionPane.showConfirmDialog(null, "Please confirm your file was saved before open a new",
                         "Warning",JOptionPane.YES_NO_CANCEL_OPTION);
-                //通过对话框中按钮的选择来决定结果，单机yes时，窗口直接消失
+                //The result is determined by the selection of the button in the dialog box. When the single machine is YES, the window directly disappears
                 if(i==0){
                     f.dispose();
                     boundX += 100;
@@ -114,7 +116,7 @@ public class notePad {
         });
     }
 
-    //open 事件
+    //Open event
     public void openListen(){
         item1.addActionListener(new ActionListener() {
 
@@ -132,7 +134,7 @@ public class notePad {
         });
     }
 
-    //save事件
+    //save event
     public void saveListen(){
         item2.addActionListener(new ActionListener() {
 
@@ -148,7 +150,7 @@ public class notePad {
         });
     }
 
-    //处理退出菜单项的动作事件
+    //Handles action events for exit menu items
     public void exitListen(){
         item4.addActionListener(new ActionListener() {
 
@@ -157,7 +159,7 @@ public class notePad {
                 // TODO Auto-generated method stub
                 int i=JOptionPane.showConfirmDialog(null, "是否真的退出系统",
                         "退出确认对话框",JOptionPane.YES_NO_CANCEL_OPTION);
-                //通过对话框中按钮的选择来决定结果，单机yes时，窗口直接消失
+                //The result is determined by the selection of the button in the dialog box. When the single machine is YES, the window directly disappears
                 if(i==0)
                     f.dispose();
 
@@ -180,8 +182,8 @@ public class notePad {
     public void find(){
         //create event buttons
         //Keep other windows was active when Search window was opened
-        final JDialog findDialog=new JDialog(f, "Search", false);//false时允许其他窗口同时处于激活状态(即无模式)
-        Container con=findDialog.getContentPane();//返回此对话框的contentPane对象
+        final JDialog findDialog=new JDialog(f, "Search", false);//False allows other Windows to be active at the same time (i.e., no mode)
+        Container con=findDialog.getContentPane();//Returns the contentPane object of this dialog box
         con.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         //Search text table
@@ -200,27 +202,27 @@ public class notePad {
         JButton cancel=new JButton("cancel");
 
         // all button event listener
-        //取消按钮事件处理
+        //Cancel button event handling
         cancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 findDialog.dispose();
             }
         });
-        //"查找下一个"按钮监听
+        //The "Find next" button listens
         findNextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //"区分大小写(C)"的JCheckBox是否被选中
+                //Whether the "case sensitive (C)" JCheckBox is checked
                 int k;
                 final String str1,str2,str3,str4,strA,strB;
                 str1=textArea.getText();
                 str2=findText.getText();
                 str3=str1.toUpperCase();
                 str4=str2.toUpperCase();
-                if(matchCheckBox.isSelected()){ //区分大小写
+                if(matchCheckBox.isSelected()){ //Case sensitivity
                     strA=str1;
                     strB=str2;
                 }
-                else{ //不区分大小写,此时把所选内容全部化成大写(或小写)，以便于查找
+                else{ //Case insensitive, at this point, the selection is all uppercase (or lowercase) for easy lookup
                     strA=str3;
                     strB=str4;
                 }
@@ -272,12 +274,12 @@ public class notePad {
         con.add(panel2);
         con.add(panel3);
         findDialog.setSize(410,180);
-        findDialog.setResizable(false);//不可调整大小
+        findDialog.setResizable(false);//Unresizable
         findDialog.setLocation(230,280);
         findDialog.setVisible(true);
     }
 
-    // select all 事件触发
+    //Select All event triggered
     public void selectAllListen(){
         editItem1.addActionListener(new ActionListener() {
             @Override
@@ -287,7 +289,7 @@ public class notePad {
         });
     }
 
-    // copy事件
+    // copy event
     public void copyListen(){
         editItem2.addActionListener(new ActionListener() {
             @Override
@@ -300,7 +302,7 @@ public class notePad {
         });
     }
 
-    // past 事件
+    // past event
     public void pastListen(){
         editItem3.addActionListener(new ActionListener() {
             @Override
@@ -320,7 +322,7 @@ public class notePad {
         });
     }
 
-    // cut 事件
+    // cut event
     public void cutListen(){
         editItem4.addActionListener(new ActionListener() {
             @Override
@@ -334,7 +336,7 @@ public class notePad {
         });
     }
 
-    //time and date事件
+    //time and date event
     public void timeListen(){
         editItem5.addActionListener(new ActionListener() {
             @Override
@@ -357,7 +359,8 @@ public class notePad {
         });
     }
 
-    //事件监听
+    //4/5000
+    //Event listeners
     public void eventListener(){
 
         newListen();
@@ -383,7 +386,7 @@ public class notePad {
         aboutListen();
     }
 
-    public void readFile(File file){//读文件
+    public void readFile(File file){//Read the file
         BufferedReader bReader;
         try {
             bReader=new BufferedReader(new FileReader(file));
@@ -398,7 +401,7 @@ public class notePad {
             // TODO: handle exception
         }
     }
-    public void writeFile(String savepath){//写文件
+    public void writeFile(String savepath){//Write files
         FileOutputStream fos;
         try {
             fos=new FileOutputStream(savepath);
@@ -412,3 +415,4 @@ public class notePad {
         textArea.getText();
     }
 }
+m
