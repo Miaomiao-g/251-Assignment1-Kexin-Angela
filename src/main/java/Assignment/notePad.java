@@ -19,7 +19,7 @@ public class notePad {
     private JFileChooser fileChooser;
     private FileInputStream fileInStream;
     private JMenuItem item0, item1, item2, item3, item4, editItem0, editItem1, editItem2, editItem3, editItem4, editItem5, aboutItem;
-    private JMenu menu1, menu2, menu3;
+    private JMenu menu1, menu2, menu3, menu4;
 
     // System clipboard
     private Toolkit toolkit=Toolkit.getDefaultToolkit();
@@ -415,4 +415,3 @@ public class notePad {
         textArea.getText();
     }
 }
-m

@@ -3,11 +3,6 @@ package Assignment;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.io.FileInputStream;
-
 public class actionTest {
 
     notePad note;
