@@ -1,6 +1,6 @@
 package Assignment;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class action extends JFrame{
 

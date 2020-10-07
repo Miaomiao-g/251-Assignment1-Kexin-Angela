@@ -1,6 +1,12 @@
 package Assignment;
 
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Document;
 import javax.swing.*;
+
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
@@ -12,10 +18,11 @@ import java.io.*;
 import java.util.Calendar;
 import java.util.Date;
 
+
 public class notePad {
     private JFrame f;
     private JLabel label;
-    private JTextArea textArea;
+    private static JTextArea textArea;
     private JFileChooser fileChooser;
     private FileInputStream fileInStream;
     private JMenuItem item0, item1, item2, item3, item4, editItem0, editItem1, editItem2, editItem3, editItem4, editItem5, aboutItem;
@@ -35,6 +42,7 @@ public class notePad {
 
         Container contentPane=f.getContentPane();
         textArea=new JTextArea();
+        //textArea.getDocument().addDocumentListener(new SyntaxHighlighter(textArea));
         JScrollPane scrollPane=new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(350, 300));
         JPanel panel=new JPanel();
@@ -142,9 +150,24 @@ public class notePad {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
                 JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter1 = new FileNameExtensionFilter("text file(*.txt)", "txt");
+                FileNameExtensionFilter filter2 = new FileNameExtensionFilter("PDF file(*.pdf)", "pdf");
+                chooser.setFileFilter(filter1);
+                chooser.setFileFilter(filter2);
+
                 if (chooser.showSaveDialog(item2)==JFileChooser.APPROVE_OPTION) {
                     File file = chooser.getSelectedFile();
-                    writeFile(file.getPath());
+                    String fname = chooser.getName(file);
+
+                    if(chooser.getFileFilter() == filter1){
+                        file=new File(chooser.getCurrentDirectory(),fname+".txt");
+                        writeFile(file.getPath());
+                    }
+                    else if(chooser.getFileFilter() == filter2){
+                        file=new File(chooser.getCurrentDirectory(),fname+".pdf");
+                        writePdf(file.getPath());
+                    }
+
                 }
             }
         });
@@ -407,11 +430,28 @@ public class notePad {
             fos=new FileOutputStream(savepath);
             fos.write(textArea.getText().getBytes());
             fos.close();
-            System.out.println("已保存");
+            System.out.println("save successful");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         textArea.getText();
     }
+    public static void writePdf(String outpath) {
+        try {
+            //1 创建Document
+            Document document = new Document();
+            //2 获取PdfWriter
+            PdfWriter.getInstance(document, new FileOutputStream(outpath));
+            //3 打开
+            document.open();
+            //4 添加内容
+            document.add(new Paragraph(textArea.getText()));
+            //5 关闭
+            document.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
