@@ -8,6 +8,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Document;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.StyledDocument;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -376,10 +377,17 @@ public class notePad {
         editItem5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //save all text as doc
+                StyledDocument doc = textArea.getStyledDocument();
                 Calendar rightNow=Calendar.getInstance();
                 Date date=rightNow.getTime();
                 //textArea.insert(date.toString(),textArea.getCaretPosition());
+                //set position to front
+                textArea.setCaretPosition(0);
+                // write date
                 textArea.replaceSelection(date.toString());
+                //set position to end
+                textArea.setCaretPosition(doc.getLength());
             }
         });
     }
