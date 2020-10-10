@@ -17,7 +17,7 @@
 ### Kexin911   2499893767@qq.com
 
 ## URL:
-### 
+### https://github.com/Miaomiao-g/251-Assignment1-Kexin-Angela
 
 ## some functions that I'd like to tell you more like:
 ### Auto-matching syntax color. For a newly created file(hasn't been saved), it will not automatically match any file type. But once you saved it or an existing file is opened, it will automatically match the syntax of that type and change the color immediately. Quite a few main languages are supported
