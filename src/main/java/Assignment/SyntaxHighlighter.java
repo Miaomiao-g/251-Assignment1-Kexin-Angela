@@ -21,7 +21,7 @@ public class SyntaxHighlighter implements DocumentListener {
     private Style voidwordStyle;
 
     public SyntaxHighlighter(JTextPane editor) {
-        // 鍑嗗鐫 鑹蹭娇鐢ㄧ殑鏍峰紡
+
         keywordStyle = ((StyledDocument) editor.getDocument()).addStyle("Keyword_Style", null);
         normalStyle = ((StyledDocument) editor.getDocument()).addStyle("Keyword_Style", null);
         voidwordStyle = ((StyledDocument) editor.getDocument()).addStyle("Keyword_Style", null);

@@ -24,7 +24,7 @@ import java.util.Date;
 public class notePad {
     private JFrame f;
     private JLabel label;
-    private JTextArea textArea;
+    private JTextPane textArea;
     private JFileChooser fileChooser;
     private FileInputStream fileInStream;
     private JMenuItem item0, item1, item2, item3, item4, editItem0, editItem1, editItem2, editItem3, editItem4, editItem5, aboutItem, viewItem0, viewItem1;
@@ -43,12 +43,12 @@ public class notePad {
         f.setBounds(boundX, boundY, 400, 200);
 
         Container contentPane=f.getContentPane();
-        textArea=new JTextArea();
+        textArea=new JTextPane();
         JScrollPane scrollPane=new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(350, 300));
         JPanel panel=new JPanel();
 
-        //textArea.getDocument().addDocumentListener(new SyntaxHighlighter(pane));
+        textArea.getDocument().addDocumentListener(new SyntaxHighlighter(textArea));
 
         JMenuBar menuBar1=new JMenuBar();  //Add the menu bar component
         f.setJMenuBar(menuBar1);          //Adds the menu bar to the top-level container
@@ -350,7 +350,8 @@ public class notePad {
                 catch (Exception ignored)
                 {
                 }
-                textArea.replaceRange(text, textArea.getSelectionStart(), textArea.getSelectionEnd());
+                //textArea.replaceRange(text, textArea.getSelectionStart(), textArea.getSelectionEnd());
+                textArea.replaceSelection(text);
             }
         });
     }
@@ -364,7 +365,8 @@ public class notePad {
                 String text = textArea.getSelectedText();
                 StringSelection selection = new StringSelection(text);
                 clipBoard.setContents(selection,null);
-                textArea.replaceRange("", textArea.getSelectionStart(), textArea.getSelectionEnd());
+                //textArea.replaceRange("", textArea.getSelectionStart(), textArea.getSelectionEnd());
+                textArea.replaceSelection("");
             }
         });
     }
@@ -376,7 +378,8 @@ public class notePad {
             public void actionPerformed(ActionEvent e) {
                 Calendar rightNow=Calendar.getInstance();
                 Date date=rightNow.getTime();
-                textArea.insert(date.toString(),textArea.getCaretPosition());
+                //textArea.insert(date.toString(),textArea.getCaretPosition());
+                textArea.replaceSelection(date.toString());
             }
         });
     }
