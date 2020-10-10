@@ -23,4 +23,4 @@
 ### Auto-matching syntax color. For a newly created file(hasn't been saved), it will not automatically match any file type. But once you saved it or an existing file is opened, it will automatically match the syntax of that type and change the color immediately. Quite a few main languages are supported
 
 ## other features:
-### We add a function to the proggram which is changing the background panel color. This function is in the *notePad.java*.
+### We add a function to the program which is changing the background panel color. This function is in the *notePad.java*. We use Json to achieve this function.
